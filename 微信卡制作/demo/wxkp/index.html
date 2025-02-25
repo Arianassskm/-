@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>微信卡片分享链接在线制作工具-顾先生的博客</title>
+    <link rel="shortcut icon" href="../../favicon.ico"> 
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="back" id="app">
+      <!-- 标题 -->
+      <div class="WeChatShareCardTitle" v-if="isShowInfo">
+        <img src="img/wx.png" alt="微信卡片分享链接在线制作工具">
+        <h1>微信卡片分享链接在线制作工具</h1>
+        <p>永久免费，喜欢请分享给你的朋友！该工具仅支持在<a href="https://www.123pan.com/s/bUbIjv-DtD5v.html" target="_blank">微信电脑版v3.4.0.50</a>或以下中使用</p>
+      </div>
+      <!-- 标题 -->
+      <!-- 分享导航 -->
+      <div class="share-box">
+        <div
+          data-v-122ffe82=""
+          id="share"
+          class="itv-flex-v--fs--c content"
+          style="display: none"
+        >
+          <img
+            data-v-122ffe82=""
+            src="img/zs.png"
+            alt=""
+            class="img--arrow"
+          />
+          <p data-v-122ffe82="" class="mb32">
+            点击右上角
+            <img src="img/dh.png" width="25px" />
+            转发分享给好友或微信群
+          </p>
+          <button
+            type="submit"
+            onclick="history.back(-1)"
+            class="btn mbt20"
+            @click="showInfo"
+          >重新制作</button>
+        </div>
+      </div>
+      <!-- 分享导航 -->
+      <div class="container">
+        <div class="preview-box" v-if="isShowInfo">
+          <!--预览卡片 -->
+          <fieldset>
+            <legend><span class="number">1</span> 卡片预览</legend>
+            <div class="preview">
+              <a href="index.html" target="_blank">
+                <h3 class="ptitle">{{PTitle}}</h3>
+                <div class="pcontent">
+                  <p>{{PDesc}}</p>
+                  <img
+                    src="../../favicon.ico"
+                    alt="微信卡片分享链接在线制作工具预览图"
+                  />
+                </div>
+              </a>
+            </div>
+          </fieldset>
+          <!--预览卡片 -->
+        </div>
+        <!-- 提示信息 -->
+        <div class="notice" v-if="isShowInfo">
+          <fieldset>
+                        <legend><span class="number">2</span> 相关链接</legend>
+          <div class="row">
+            <div class="row-item">
+              <a href="https://www.qqkkb.com/685.html" target="_blank">
+                <button class="btn">使用教程</button>
+              </a>
+            </div>
+            <div class="row-item">
+              <a href="https://shop.qqkkb.com" target="_blank">
+                <button class="btn">会员权益</button>
+              </a>
+            </div>
+            <div class="row-item">
+              <a href="https://www.qqkkb.com" target="_blank">
+                <button class="btn">源码下载</button>
+              </a>
+            </div>
+            </div>
+          </fieldset>
+        </div>
+        <!-- 提示信息 -->
+        <!-- 提交表单 -->
+        <div class="card-form">
+          <form id="sub" method="get" accept-charset="UTF-8">
+            <fieldset>
+              <legend><span class="number">3</span> 卡片信息</legend>
+
+              <label for="title">卡片标题:</label>
+              <input type="text" v-model="PTitle" name="title" required />
+
+              <label for="desc">卡片简介:</label>
+              <input
+                type="text"
+                v-model="PDesc"
+                name="desc"
+                placeholder="可留空"
+              />
+
+              <label for="link">卡片链接:</label>
+              <input
+                type="text"
+                v-model="PLink"
+                name="link"
+                placeholder="输入域名或链接地址"
+                required
+              />
+
+              <label for="img">卡片图片:</label>
+              <input
+                type="text"
+                v-model="PCover"
+                name="img"
+                placeholder="图片的链接地址，可留空"
+              />
+            </fieldset>
+            <button type="submit" @click="showInfo" class="btn">制作</button>
+          </form>
+        </div>
+        <!-- 提交表单 -->
+        <div>
+
+          <!-- 文章页脚 -->
+          <ins
+            class="adsbygoogle"
+            style="display: block; height: 30px"
+            data-ad-client="ca-pub-8781808763705766"
+            data-ad-slot="8132682838"
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+          ></ins>
+
+        </div>
+        <div class="footer">
+          <a href="https://www.qqkkb.com/" target="_blank">顾先生的博客</a>
+        </div>
+      </div>
+    </div>
+  <script src="js/jweixin-1.6.0.js"></script>
+  <script src="js/wxshare.js"></script>
+  <script
+    type="text/javascript"
+    src="https://unpkg.com/pxmu/dist/web/pxmu.min.js"
+  ></script>
+  <script src="js/vue.js"></script>
+  <script>
+    var app = new Vue({
+      el: "#app",
+      data: {
+        PTitle: "顾先生的博客",
+        PDesc: "顾先生的博客，是基于 Typecho程序搭建的博客。用心写好每篇文章！更加符合年轻人口味的博客！",
+        PLink: "",
+        PCover: "",
+        isShowInfo: true,
+      },
+      methods: {
+        showInfo() {
+          let webPath = window.location.href;
+          if (webPath.indexOf("title") != -1) {
+            this.isShowInfo = false;
+          } else {
+            this.isShowInfo = true;
+          }
+        },
+      },
+      mounted() {
+        this.showInfo();
+        // this.showDialog();
+      },
+    });
+    wx.config({
+      debug: false,
+      jsApiList: [
+        "checkJsApi",
+        "updateTimelineShareData",
+        "updateAppMessageShareData",
+        "onMenuShareTimeline",
+        "onMenuShareAppMessage",
+        "onMenuShareQQ",
+        "onMenuShareWeibo",
+      ],
+    });
+    var wstitle = Query("title");
+    var wsdesc = Query("desc");
+    var wslink = Query("link");
+    var qqlink = Query("link");
+    var wsimg = Query("img");
+    if ((wstitle != "") & (wslink != "")) {
+      document.getElementById("share").style.display = "";
+      document.getElementById("sub").style.display = "none";
+    }
+    function Query(name = null) {
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+      var r = window.location.search.substr(1).match(reg);
+      if (r != null) return decodeURIComponent(r[2]);
+      return "";
+    }
+  </script>
+    </body>
+</html>
